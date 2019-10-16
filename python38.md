@@ -7,7 +7,6 @@ fontsize: 10pt
 aspectratio: 169
 ---
 
-
 # New in  Python
 
 * Python 3.6
@@ -29,12 +28,13 @@ aspectratio: 169
 
 # Python 3.8: Positional-only arguments
 
-Challenge: write `dict` yourself
 
 ```python
 d = dict(one=1, two=2)
 d = dict({'one':1, 'two':2}
 ```
+
+Challenge: write `dict` yourself
 . . .
 
 ```python
@@ -46,7 +46,7 @@ dict(arg=3) # OOPS!
 
 You have to use `*args`, and limit to 1 arg yourself. Or...
 
-# Python 3.8: Positional-only arguments
+# Python 3.8: Positional-only arguments (2)
 
 If you look at the signatures of `dict`, `pow`, or some other builtins, you will see something like this:
 
@@ -112,14 +112,16 @@ if res := check():
 In Python 3.6, f-strings make string interpolation easy:
 
 ```python
+>>> x = 3
+>>> print(f"x = {x}")
 x = 3
-print(f"x = {x}")
 ```
 
 Debugging is now `DRY` with the `=` specifier:
 
 ```python
-print(f"{x = }")
+>>> print(f"{x = }")
+x = 3
 ```
 
 * Spaces respected
@@ -148,15 +150,37 @@ class HasName(Protocol):
 Now you can use `HasName`, will require a name attribute.
 
 
+# TypedASDT
+
+* TypedAST merged into Python!
+* `feature_version` selector (3.4+)
+
+
+```python
+>>> import ast
+>>> s = ast.parse('x = 2 # type: Int', type_comments=True)
+>>> ast.dump(s)
+```
+```
+"Module(body=[Assign(
+  targets=[Name(id='x', ctx=Store())],
+  value=Constant(value=2, kind=None),
+  type_comment='Int')],
+type_ignores=[])"
+```
+
+* `ast.get_source_segment` gets the source for a bit of ast, if location information is present.
+
 # Other features
 
 * `TypedDict` gives types to dict parts
 * `importlib.metadata` gives you info from installed packages (like `importlib.resources`)
 * `math` and `statistics` have new functions
-* `namedtuple`, `pickle`, and more faster
-* `list`s use less memory
+* `namedtuple`, `pickle`, and more are faster
 * `SyntaxError` messages are more detailed in some common cases
-* `multiprocessing.shared_memory` - can avoid pickle transfer of objects
+* `multiprocessing.shared_memory` -- can avoid pickle transfer of objects
+* `reversed` works on dicts
+* Unpacking in `return`/`yield`
 
 # Other developer changes
 
@@ -164,7 +188,7 @@ Now you can use `HasName`, will require a name attribute.
 * Single ABI for debug/release
 * Runtime audit hooks
 * New C API for initialization
-* Provisional `vectorcall` protocol - fast calling of C functions
+* Provisional `vectorcall` protocol -- fast calling of C functions
 * Pickle support out-of-band data (multiple streams) (Protocol 5)
 * `__code__` now has `.replace`, like `__signature__`
 
@@ -173,8 +197,8 @@ Now you can use `HasName`, will require a name attribute.
 
 ## Released
 * Python.org released
-* Docker images released
-* Scikit-HEP GCC containers
+* Docker: `docker run --rm -it python:3.8`
+* Scikit-HEP GCC 9.2 ManyLinux1 containers
 
 ## Not yet released
 * Conda: Coming soon
@@ -186,3 +210,6 @@ Now you can use `HasName`, will require a name attribute.
 # Sources
 * [Official docs](https://docs.python.org/3.8/whatsnew/3.8.html)
 * [RealPython article](https://realpython.com/python38-new-features/)
+* [DeepSource](https://deepsource.io/blog/python-3-8-whats-new/)
+
+This presentation available at \github{henryiii/python38}.
