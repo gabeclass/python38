@@ -29,13 +29,12 @@ aspectratio: 169
 
 # Python 3.8: Positional-only arguments
 
-## Challenge: write `dict` yourself
+Challenge: write `dict` yourself
 
 ```python
 d = dict(one=1, two=2)
 d = dict({'one':1, 'two':2}
 ```
-
 . . .
 
 ```python
@@ -45,7 +44,7 @@ def dict(arg, **kargs):
 dict(arg=3) # OOPS!
 ```
 
-* You have to use `*args`, and limit to 1 arg yourself. Or...
+You have to use `*args`, and limit to 1 arg yourself. Or...
 
 # Python 3.8: Positional-only arguments
 
@@ -74,7 +73,7 @@ def f(pos, /, pos_or_kw, *, kw_required, kw_optional=None):
 
 # Python 3.8: Walrus operator
 
--Assignment in Python is very limited:
+Assignment in Python is a statement (limited):
 
 ```python
 item = ...       # Simple
@@ -104,8 +103,9 @@ if res := check():
     print(res)
 ```
 
-* Use carefully, can be powerful
+* Use carefully: could make code harder to read
 * C++17/C++20 adding variable defines in loops for the same reason
+* Scope leaks, unfortunately
 
 # Python 3.8: f-string debugging
 
@@ -129,7 +129,7 @@ print(f"{x = }")
 
 Static type hints are a big feature of Python 3, and now they are much more powerful:
 
-## Literals type (AKA enums)
+## Literals type (AKA make-shift enums)
 ```python
 def f(val : Literal['yes', 'no', 'auto']): ...
 ```
@@ -140,18 +140,18 @@ x : Final = True
 x = False # Invalid in type checker like mypy
 ```
 
-## Protocols (ACA C++20 Concepts)
+## Protocols (ACA C++20 Concepts / Java Interface)
 ```python
 class HasName(Protocol):
     name: str
-# Now you can use HasName, will require a name attribute
 ```
+Now you can use `HasName`, will require a name attribute.
 
 
 # Other features
 
 * `TypedDict` gives types to dict parts
-* `importlib.metadata` gives you info from installed packages (like `importlib.resources`
+* `importlib.metadata` gives you info from installed packages (like `importlib.resources`)
 * `math` and `statistics` have new functions
 * `namedtuple`, `pickle`, and more faster
 * `list`s use less memory
@@ -164,7 +164,7 @@ class HasName(Protocol):
 * Single ABI for debug/release
 * Runtime audit hooks
 * New C API for initialization
-* Provisional `vectorcall` protocal - fast calling of C functions
+* Provisional `vectorcall` protocol - fast calling of C functions
 * Pickle support out-of-band data (multiple streams) (Protocol 5)
 * `__code__` now has `.replace`, like `__signature__`
 
@@ -183,6 +183,6 @@ class HasName(Protocol):
 * Still missing in Azure, etc.
 * Scikit-HEP build tools (Windows, ManyLinux1 + GCC 9.2)
 
-## Sources
+# Sources
 * [Official docs](https://docs.python.org/3.8/whatsnew/3.8.html)
 * [RealPython article](https://realpython.com/python38-new-features/)
