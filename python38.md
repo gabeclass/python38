@@ -104,7 +104,7 @@ if res := check():
     print(res)
 
 a = [None, 0, 1, 2]
-while a := b.pop()):
+while a := b.pop():
     print(a)
 ```
 
