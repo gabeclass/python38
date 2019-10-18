@@ -35,10 +35,11 @@ d = dict({'one':1, 'two':2}
 ```
 
 Challenge: write `dict` yourself
+
 . . .
 
 ```python
-def dict(arg, **kargs):
+def dict(arg=None, **kargs):
     ...
 
 dict(arg=3) # OOPS!
@@ -48,10 +49,10 @@ You have to use `*args`, and limit to 1 arg yourself. Or...
 
 # Python 3.8: Positional-only arguments (2)
 
-If you look at the signatures of `dict`, `pow`, or some other builtins, you will see something like this:
+If you look at the signatures of `dict`, `pow`, or some other builtins, you will see something kind of like this:
 
 ```python
-def dict(arg, /, **kargs):
+def dict(arg=None, /, **kargs):
     ...
 ```
 
@@ -76,7 +77,7 @@ def f(pos, /, pos_or_kw, *, kw_required, kw_optional=None):
 Assignment in Python is a statement (limited):
 
 ```python
-item = ...       # Simple
+item = ...       # simple
 item[...] = ...  # item
 item.attr = ...  # attr
 a, b, = ...      # tuple
@@ -95,17 +96,21 @@ f(x=True)    # Keyword argument
 Solution: A new operator!
 
 * Spelling: `:=` (looks like a sideways walrus)
-* Works anywhere normal `=` doesn't (one way to do things)
+* Works almost anywhere normal `=` doesn't (one way to do things)
 * Often requires parenthesis for clarity
 
 ```python
 if res := check():
     print(res)
+
+a = [None, 0, 1, 2]
+while a := b.pop()):
+    print(a)
 ```
 
 * Use carefully: could make code harder to read
-* C++17/C++20 adding variable defines in loops for the same reason
-* Scope leaks, unfortunately
+* C++17/C++20 adding variable defines in loops for similar reasons
+* Scope leaks, (un?)fortunately
 
 # Python 3.8: f-string debugging
 
@@ -138,7 +143,7 @@ def f(val : Literal['yes', 'no', 'auto']): ...
 
 ## Final (AKA const)
 ```python
-x : Final = True
+x : Final[bool] = True
 x = False # Invalid in type checker like mypy
 ```
 
